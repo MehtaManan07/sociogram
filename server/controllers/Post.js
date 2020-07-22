@@ -18,15 +18,15 @@ exports.createPost = (req, res) => {
   });
 };
 
-exports.getAllPosts = (req,res) => {
-    Post.find()
-    .populate('user','name _id')
-    .exec((error,posts) => {
-        if(error) {
-            console.log(error)
-            res.json({ error: 'Error while fetching all posts' })
-        } else {
-            res.json(posts)
-        }
-    })
-}
+exports.getAllPosts = (req, res) => {
+  Post.find()
+    .populate("user", "name _id")
+    .exec((error, posts) => {
+      if (error) {
+        console.log(error);
+        res.json({ error: "Error while fetching all posts" });
+      } else {
+        res.json(posts);
+      }
+    });
+};
