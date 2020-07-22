@@ -4,10 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon server",
-    "frontend": "npm start --prefix client"
+    "frontend": "npm start --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
