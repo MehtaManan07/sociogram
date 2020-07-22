@@ -19,6 +19,9 @@ connectDB();
 // Dev logging middleware
   app.use(morgan("dev"));
 
+  // Routes
+  app.use('/api/auth',require('./router/Auth'))
+
 const port = process.env.PORT || 5000;
 
 const server = app.listen(port, () => {
