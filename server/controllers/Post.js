@@ -30,3 +30,16 @@ exports.getAllPosts = (req, res) => {
       }
     });
 };
+
+exports.userPosts = (req, res) => {
+  Post.find({ user: req.user._id })
+    .populate("user", "_id name")
+    .exec((userPost, error) => {
+      if (error) {
+        console.log(error);
+        res.json({ error: "Error while fetching all posts" });
+      } else {
+        res.json(userPost);
+      }
+    });
+};
