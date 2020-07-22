@@ -59,6 +59,7 @@ exports.login = async (req, res) => {
         if (err) {
           throw err;
         }
+        user.password = undefined;
         res.json({ token, user });
       }
     );
