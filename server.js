@@ -3,10 +3,10 @@ const dotenv = require("dotenv");
 const colors = require('colors');
 const morgan = require("morgan");
 
-const connectDB = require("./config/db");
+const connectDB = require("./server/config/db");
 
 // load dotenv files
-dotenv.config({ path: "./config/.env" });
+dotenv.config({ path: "./server/config/.env" });
 
 const app = express();
 
@@ -20,7 +20,7 @@ connectDB();
   app.use(morgan("dev"));
 
   // Routes
-  app.use('/api/auth',require('./router/Auth'))
+  app.use('/api/auth',require('./server/router/Auth'))
 
 const port = process.env.PORT || 5000;
 
