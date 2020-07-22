@@ -7,7 +7,7 @@ exports.createPost = (req, res) => {
     body,
     user: req.user,
   });
-  
+
   newPost.save((error, post) => {
     if (error) {
       res.status(400).json({ error: "Erro while creating the post" });
@@ -17,3 +17,16 @@ exports.createPost = (req, res) => {
     }
   });
 };
+
+exports.getAllPosts = (req,res) => {
+    Post.find()
+    .populate('user','name _id')
+    .exec((error,posts) => {
+        if(error) {
+            console.log(error)
+            res.json({ error: 'Error while fetching all posts' })
+        } else {
+            res.json(posts)
+        }
+    })
+}
