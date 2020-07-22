@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
+
   const user = await User.findOne({ email });
   if (user) {
     return res.status(400).json({
@@ -21,6 +22,7 @@ exports.register = async (req, res) => {
   newUser.password = await bcrypt.hash(password, salt);
 
   newUser.save((error, user) => {
+    console.log(error, user)
     if (error) {
       console.log(error);
       return res.status(500).json({ error: "Error while saving the user" });

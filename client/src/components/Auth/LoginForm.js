@@ -8,11 +8,11 @@ const LoginForm = () => {
         <h2>Sociogram</h2>
         <div className="input-field col s12">
           <input id="email" type="email" className="validate" />
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
         </div>
         <div className="input-field col s12">
           <input id="password" type="password" className="validate" />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
         </div>
         <button
           className="btn waves-effect waves-light"

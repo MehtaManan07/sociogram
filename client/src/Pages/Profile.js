@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ProfileTop from "../components/Profile/ProfileTop";
 import ProfilePosts from "../components/Profile/ProfilePosts";
 
