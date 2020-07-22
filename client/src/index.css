@@ -34,6 +34,12 @@
 
 /* Profile posts end */
 
+.home-card {
+  max-width: 500px;
+  height: max-content;
+  margin: 20px auto;
+}
+
 .auth-card {
   padding: 20px;
   text-align: center;
