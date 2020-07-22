@@ -25,6 +25,7 @@ const Register = () => {
         console.log(response.error)
         toast.error(`${response.error}`)
       } else {
+        // toast.success(`Hello ${values.name}, welcome to Sociogram`)
         setValues({ ...values, name: '', email: '', password: '' })
         history.push('/login')
       }

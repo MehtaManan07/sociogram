@@ -26,6 +26,6 @@ export const loginUser = (data) => {
     })
     .catch((error) => {
       console.log(error.message);
-      return error;
+      return error.response.data;
     });
 };
