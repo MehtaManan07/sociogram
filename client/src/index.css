@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
-/* .bodyy {
-  margin: 0 90px;
-} */
+body {
+ background-color: #e8eaf6; 
+}
 .brand-logo {
   font-family: 'Grand Hotel', cursive;
 }
