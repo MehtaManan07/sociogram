@@ -1,33 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import CreatePostForm from "../components/Posts/CreatePostForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { imageUploadCloud, createNewPost } from "../helpers/post";
 
 const CreatePost = () => {
+  const [values, setValues] = useState({
+    title: "",
+    body: "",
+    image: "",
+    imageUrl: "",
+  });
+
+  const onTextChangeHandler = (name) => (e) => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+
+  const imageChangeHandler = (e) => {
+    setValues({ ...values, image: e.target.files[0] });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("file", values.image);
+    data.append("upload_preset", "sociogram");
+    data.append("cloud_name", "manan07");
+    imageUploadCloud(data).then((url) => {
+      setValues({ ...values, imageUrl: url });
+    });
+    createNewPost({
+      title: values.title,
+      body: values.body,
+      image: values.imageUrl,
+    }).then((response) => {
+      if (response.error) {
+        console.log(response.error);
+        console.log(values);
+        toast.error(`${response.error}`);
+      } else {
+        toast.success(`Post created successfully`);
+        console.log(response);
+      }
+    });
+  };
+
   return (
-    <div
-      className="card input-field"
-      style={{
-        margin: "100px auto",
-        maxWidth: "500px",
-        height: "100%",
-        padding: "20px",
-        textAlign: "center",
-      }}
-    >
-      <input type="text" placeholder="Title of your post..." />
-      <input type="text" placeholder="Description..." />
-      <div className="file-field input-field">
-        <div className="btn">
-          <span> Image </span>
-          <input type="file" />
-        </div>
-        <div className="file-path-wrapper">
-          <input type="text" className="file-path validate" />
-        </div>
-      </div>
-      <button className="btn waves-effect waves-light" type="submit">
-        Create Post
-        <i className="material-icons right">send</i>
-      </button>
-    </div>
+    <>
+      {JSON.stringify(values)}
+      <ToastContainer />
+      <CreatePostForm
+        onSubmitHandler={onSubmitHandler}
+        onTextChangeHandler={onTextChangeHandler}
+        imageChangeHandler={imageChangeHandler}
+        values={values}
+      />
+    </>
   );
 };
 
