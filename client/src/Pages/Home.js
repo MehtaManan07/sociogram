@@ -1,6 +1,23 @@
-import React from "react";
-
+import React, {useState, useEffect} from "react";
+import { fetchAllPosts } from "../helpers/post";
+import {isAuth} from '../helpers/auth'
 const Home = () => {
+  useEffect(() => {
+    console.log(isAuth().token)
+    fetchPosts()
+  }, [])
+  const fetchPosts = () => {
+    fetchAllPosts(isAuth().token)
+    .then(res => {
+      if(res.error) {
+        console.log(res.error)
+      } else {
+        console.log(res)
+        setPosts(res)
+      }
+    })
+  }
+  const [posts, setPosts] = useState([])
   return (
     <div className="home">
       <div className="card home-card">

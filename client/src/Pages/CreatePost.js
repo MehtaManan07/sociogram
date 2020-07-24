@@ -47,7 +47,6 @@ const CreatePost = () => {
 
   return (
     <>
-      {JSON.stringify(values)}
       <ToastContainer />
       <CreatePostForm
         onSubmitHandler={onSubmitHandler}

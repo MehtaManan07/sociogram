@@ -14,9 +14,22 @@ export const imageUploadCloud = (data) => {
 };
 
 export const createNewPost = (data) => {
-  console.log(data)
   return Axios.post(`${API}/post/create`, data, {
     headers: { "Content-Type": "application/json" },
+  }).then(response => {
+    console.log(response)
+    return response.data
+  }).catch(error => {
+    console.log(error)
+    return error.response;
+  })
+};
+
+export const fetchAllPosts = (token) => {
+  return Axios.get(`${API}/post/all`,{
+    headers: {
+      Authorixation: `Bearer ${token}`
+    }
   }).then(response => {
     console.log(response)
     return response.data

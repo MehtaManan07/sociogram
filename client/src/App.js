@@ -9,6 +9,7 @@ import CreatePost from "./Pages/CreatePost";
 import { reducer, initialState } from "./reducers/userReducer";
 import Landing from "./Pages/Landing";
 import { isAuth } from "./helpers/auth";
+import PrivateRoute from "./components/Auth/PrivateRoute";
 
 export const UserContext = createContext();
 
@@ -25,11 +26,11 @@ const Routing = () => {
   return (
     <Switch>
       <Route exact path="/" component={Landing} />
-      <Route path="/home" exact component={Home} />
+      <PrivateRoute path="/home" exact component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/create/post" component={CreatePost} />
+      <PrivateRoute path="/profile" component={Profile} />
+      <PrivateRoute path="/create/post" component={CreatePost} />
     </Switch>
   );
 };
