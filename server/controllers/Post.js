@@ -23,37 +23,6 @@ exports.createPost = (req, res) => {
   }
 };
 
-exports.create = (req, res) => {
-  // let form = new formidable.IncomingForm();
-  // form.keepExtensions = true;
-  // form.parse(req, (error, fields, files) => {
-  //   if (error) {
-  //     return res.status(400).json({
-  //       error: "Image cannot not be uploaded",
-  //     });
-  //   }
-  //   let post = new Post(fields);
-  //   if (files.image) {
-  //     if (files.image.size > 10 ** 6) {
-  //       return res.status(400).json({
-  //         error: "Size of image must be less than 1 mb",
-  //       });
-  //     }
-  //     post.image.data = fs.readFileSync(files.image.path);
-  //     post.image.contentType = files.image.type;
-  //   }
-  //   post.save((error, result) => {
-  //     if (error) {
-  //       console.log(error);
-  //       return res.status(400).json({
-  //         error,
-  //       });
-  //     }
-  //     res.json(result);
-  //   });
-  // });
-};
-
 exports.getAllPosts = (req, res) => {
   Post.find()
     .populate("user", "name _id")
