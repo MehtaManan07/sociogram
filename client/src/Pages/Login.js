@@ -4,8 +4,10 @@ import { UserContext } from '../App'
 import "react-toastify/dist/ReactToastify.min.css";
 import LoginForm from "../components/Auth/LoginForm";
 import { loginUser, authenticate, isAuth } from "../helpers/auth";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory()
   const {state,dispatch} = useContext(UserContext)
   const [values, setValues] = useState({
     email: "",
@@ -27,7 +29,8 @@ const Login = () => {
           authenticate(response, () => {
             setValues({ ...values, email: "", password: "" });
             toast.success("hellllooo");
-            dispatch({ type: 'USER', payload: isAuth.data })
+            dispatch({ type: 'USER', payload: isAuth().user })
+            history.push('/home')
           });
         }
       }

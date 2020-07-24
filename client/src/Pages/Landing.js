@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { UserContext } from "../App";
-import { isAuth } from "../helpers/auth";
+import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Landing = () => {
-  const { state, dispatch } = useContext(UserContext);
-  const history = useHistory()
-  useEffect(() => {
-    if (isAuth()) {
-      dispatch({ type: "USER", payload: isAuth().user });
-      history.push('/home')
-    }
-  }, []);
+  // const { state, dispatch } = useContext(UserContext);
+  // const history = useHistory()
+  // useEffect(() => {
+  //   if (isAuth()) {
+  //     dispatch({ type: "USER", payload: isAuth().user });
+  //     history.push('/home')
+  //   }
+  // }, []);
   return (
     <div className="landing">
       <div className="dark-overlay">
@@ -26,7 +24,6 @@ const Landing = () => {
             SOCIOGRAM
           </h1>
           <p className="lead">
-            {" "}
             A Social Media So Desirable, feel the social experience{" "}
           </p>
           <div className="buttons">
