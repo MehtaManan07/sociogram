@@ -48,3 +48,20 @@ export const fetchAllPosts = (token) => {
       return error.response;
     });
 };
+
+export const getusersPosts = (token) => {
+  return Axios.get(`${API}/post/userPosts`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+

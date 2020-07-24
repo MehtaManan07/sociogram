@@ -18,9 +18,7 @@ const Routing = () => {
   const history = useHistory();
   useEffect(() => {
     if (isAuth()) {
-      console.log(state)
       dispatch({ type: "USER", payload: isAuth().user });
-      history.push("/home");
     }
   }, []);
   return (
