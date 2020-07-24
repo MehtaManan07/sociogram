@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const history = useHistory()
-  const {state,dispatch} = useContext(UserContext)
+  const {dispatch} = useContext(UserContext)
   const [values, setValues] = useState({
     email: "",
     password: "",
