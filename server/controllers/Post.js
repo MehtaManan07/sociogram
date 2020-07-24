@@ -48,3 +48,31 @@ exports.userPosts = (req, res) => {
       }
     });
 };
+
+exports.updateLikes = (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $push: { likes: req.user._id } },
+    { new: true }
+  ).exec((error, result) => {
+    if(error) {
+      return res.status(400).json({ error })
+    } else {
+      return res.json(result)
+    }
+  })
+};
+
+exports.unLike = (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    { $pull: { likes: req.user._id } },
+    { new: true }
+  ).exec((error, result) => {
+    if(error) {
+      return res.status(400).json({ error })
+    } else {
+      return res.json(result)
+    }
+  })
+};
