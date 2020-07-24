@@ -23,8 +23,8 @@ connectDB();
   app.use(morgan("dev"));
 
   // Routes
-  app.use('/api/auth',require('./server/router/Auth'))
-  app.use('/api/post',require('./server/router/Post'))
+  app.use('/api/auth',require('./server/routes/Auth'))
+  app.use('/api/post',require('./server/routes/Post'))
 
 const port = process.env.PORT || 5000;
 
