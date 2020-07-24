@@ -1,8 +1,12 @@
 export const initialState = null;
 
-export const reducer = (state, action) => {
-  if (action.type === "USER") {
-    return action.payload;
+export const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+  case 'USER':
+    return { ...state, ...payload }
+  case 'LOGOUT':
+    return null
+  default:
+    return state
   }
-  return state;
-};
+}

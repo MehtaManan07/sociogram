@@ -22,6 +22,12 @@ const Navbar = () => {
       <li>
         <Link to="/profile">Profile</Link>
       </li>
+      <li>
+        <a onClick={() => {
+          localStorage.removeItem('jwt')
+          dispatch({ type: 'LOGOUT' })
+        }} style={{ cursor: 'pointer' }}>Logout</a>
+      </li>
     </>
   );
 
