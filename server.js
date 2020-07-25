@@ -2,7 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require('colors');
 const morgan = require("morgan");
-const cors = require('cors');
 
 const connectDB = require("./server/config/db");
 
@@ -13,8 +12,6 @@ const app = express();
 
 // Body parser
 app.use(express.json())
-// cors
-app.use(cors())
 
 //Connect to database
 connectDB();

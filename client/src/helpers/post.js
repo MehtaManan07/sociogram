@@ -1,4 +1,3 @@
-import { API } from "./config";
 import Axios from "axios";
 
 export const imageUploadCloud = (data) => {
@@ -17,7 +16,7 @@ export const imageUploadCloud = (data) => {
 };
 
 export const createNewPost = (data, token) => {
-  return Axios.post(`${API}/post/create`, data, {
+  return Axios.post(`/api/post/create`, data, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -34,7 +33,7 @@ export const createNewPost = (data, token) => {
 };
 
 export const fetchAllPosts = (token) => {
-  return Axios.get(`${API}/post/all`, {
+  return Axios.get(`/api/post/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -50,7 +49,7 @@ export const fetchAllPosts = (token) => {
 };
 
 export const getusersPosts = (token) => {
-  return Axios.get(`${API}/post/userPosts`, {
+  return Axios.get(`/api/post/userPosts`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -65,3 +64,34 @@ export const getusersPosts = (token) => {
     });
 };
 
+export const likePost = (token, postId) => {
+  return Axios.put(`/api/post/like`, JSON.stringify({postId}), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then(res => {
+    return res.data
+  })
+  .catch(err => {
+    console.log(err.response)
+    return err
+  })
+};
+
+export const unlikePost = (token, postId) => {
+  return Axios.put(`/api/post/unlike`, JSON.stringify({postId}), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then(res => {
+    return res.data
+  })
+  .catch(err => {
+    console.log(err.response)
+    return err
+  })
+};

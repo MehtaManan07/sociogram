@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -15,7 +15,6 @@ export const UserContext = createContext();
 
 const Routing = () => {
   const { state, dispatch } = useContext(UserContext);
-  const history = useHistory();
   useEffect(() => {
     if (isAuth()) {
       dispatch({ type: "USER", payload: isAuth().user });

@@ -1,9 +1,8 @@
 import axios from "axios";
-import { API } from "./config";
 
 export const registerUser = (user) => {
   return axios
-    .post(`${API}/auth/register`, JSON.stringify(user), {
+    .post(`/api/auth/register`, JSON.stringify(user), {
       headers: { "Content-Type": "application/json" },
     })
     .then((response) => {
@@ -17,7 +16,7 @@ export const registerUser = (user) => {
 
 export const loginUser = (data) => {
   return axios
-    .post(API + "/auth/login", JSON.stringify(data), {
+    .post("/api/auth/login", JSON.stringify(data), {
       headers: { "Content-Type": "application/json" },
     })
     .then((response) => {

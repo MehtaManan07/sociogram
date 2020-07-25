@@ -40,6 +40,10 @@ body {
   margin: 20px auto;
 }
 
+.icons {
+  justify-content: space-between;
+}
+
 .auth-card {
   padding: 20px;
   text-align: center;

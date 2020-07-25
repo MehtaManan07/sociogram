@@ -1,3 +1,7 @@
+
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+
 /* 
 const expressJwt = require('express-jwt')
 exports.requireLogin = expressJwt({
@@ -6,9 +10,6 @@ exports.requireLogin = expressJwt({
     algorithms: ['HS256'] 
   });
 */
-
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -23,7 +24,6 @@ module.exports = (req, res, next) => {
     }
     const { _id } = payload;
     User.findById(_id).then((userData) => {
-      console.log(userData);
       req.user = userData;
       next();
     });
