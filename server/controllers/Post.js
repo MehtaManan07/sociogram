@@ -98,3 +98,21 @@ exports.unLike = (req, res) => {
     }
   })
 };
+
+exports.addComment = (req, res) => {
+  const comment = {
+    text: req.body.text,
+    user: req.user._id 
+  }
+  Post.findByIdAndUpdate(
+    { $pull: { comments: comment } },
+    { new: true }
+  ).populate("comments.user", "_id name")
+  .exec((error, result) => {
+    if(error) {
+      return res.status(400).json({ error })
+    } else {
+      return res.json(result)
+    }
+  })
+};
