@@ -114,3 +114,22 @@ exports.addComment = (req, res) => {
       }
     });
 };
+
+exports.deletePost = (req,res) => {
+  Post.findOne({ _id: req.params.postId })
+  .populate('user',"_id")
+  .exec((error, post) => {
+    if(error || !post) {
+      return res.status(422).json(error)
+    } 
+    if(post.user._id.toString() === req.user._id.toString()) {
+      post.remove((error, deletedPost) => {
+        if(error) {
+          return res.status(400).json(error)
+        } else {
+          return res.status(200).json(deletedPost)
+        }
+      })
+    }
+  })
+}
