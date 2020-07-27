@@ -4,7 +4,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { isAuth } from "../../helpers/auth";
 
-const CommentForm = ({ posts, inputComment, setPosts, setPost, post, home = false }) => {
+const CommentForm = ({
+  posts,
+  inputComment,
+  setPosts,
+  setPost,
+  post,
+  home = false,
+}) => {
   const [comment, setComment] = useState("");
 
   const makeNewComment = (postId, text) => {
@@ -45,6 +52,7 @@ const CommentForm = ({ posts, inputComment, setPosts, setPost, post, home = fals
       <form className="form-container" onSubmit={submitHandler(post)}>
         <input
           type="text"
+          autoFocus={!home}
           ref={inputComment}
           value={comment}
           onChange={(e) => setComment(e.target.value)}

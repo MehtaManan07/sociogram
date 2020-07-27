@@ -1,6 +1,7 @@
 import React from "react";
 import { likePost, unlikePost } from "../../helpers/post";
 import { isAuth } from "../../helpers/auth";
+import { Link } from "react-router-dom";
 
 const Likes = ({ post, onCommentClick, state, posts, setPost, setPosts, home = false }) => {
   const likeOnePost = (id) => {
@@ -61,12 +62,14 @@ const Likes = ({ post, onCommentClick, state, posts, setPost, setPosts, home = f
           onClick={() => likeOnePost(post._id)}
           style={{ cursor: "pointer", color: "rgba(255,0,0,0.5)" }}
         ></i>
-      )}
+      )}{ home && 
+      <Link to={`/singlepost/${post._id}`}>
       <i
       onClick={onCommentClick}
         className="far fa-comment fa-2x"
         style={{ marginLeft: "8px" }}
       ></i>
+      </Link>}
       <h6>{post.likes.length} likes</h6>
     </>
   );

@@ -47,7 +47,7 @@ const Home = () => {
                 />
               </div>
               <PostBody post={post} />
-              <Link to={`/singlepost/${post._id}`}>View all comments</Link>
+              <Link to={`/singlepost/${post._id}`} style={{ textDecoration: 'none' }}>View all comments</Link>
               <ul>
                 {post.comments &&
                   post.comments.slice(-2).map((comment) => (
