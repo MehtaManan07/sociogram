@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { fetchAllPosts } from "../helpers/post";
+import { fetchAllPosts, postDelete } from "../helpers/post";
 import { Link } from "react-router-dom";
 import { isAuth } from "../helpers/auth";
 import { UserContext } from "../App";
@@ -14,23 +14,41 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   const { state } = useContext(UserContext);
-  
+
   const fetchPosts = () => {
     fetchAllPosts(isAuth().token).then((res) => {
       if (res.error) {
         console.log(res.error);
       } else {
-        setPosts(res);
+        const reversedArray = res.reverse();
+        setPosts(reversedArray);
       }
     });
   };
+
+  const onDeleteClicked = (postId) => {
+    postDelete(isAuth().token,postId)
+    .then(res => {
+      console.log(res)
+    })
+    fetchPosts()
+  }
 
   return (
     <div className="home">
       {posts &&
         posts.map((post) => (
           <div key={post._id} className="card home-card">
-            <h5>{post.user.name}</h5>
+            <h5>
+              {post.user.name}{" "}
+              {post.user._id === state._id && (
+                <i
+                  className="fa fa-trash"
+                  onClick={() => onDeleteClicked(post._id)}
+                  style={{ cursor: "pointer", marginTop: 1, float: "right" }}
+                ></i>
+              )}
+            </h5>
             <div className="card-image">
               <Link to={`/singlepost/${post._id}`}>
                 <img src={post.image} alt="postImage" />
@@ -47,7 +65,15 @@ const Home = () => {
                 />
               </div>
               <PostBody post={post} />
-              <Link to={`/singlepost/${post._id}`} style={{ textDecoration: 'none' }}>View all comments</Link>
+              {post.comments.length > 2 && (
+                <Link
+                  to={`/singlepost/${post._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  View all comments
+                </Link>
+              )}
+
               <ul>
                 {post.comments &&
                   post.comments.slice(-2).map((comment) => (

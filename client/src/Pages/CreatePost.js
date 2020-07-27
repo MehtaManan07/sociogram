@@ -4,8 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { imageUploadCloud, createNewPost } from "../helpers/post";
 import { isAuth } from "../helpers/auth";
+import { useHistory } from "react-router-dom";
 
 const CreatePost = () => {
+  const history = useHistory();
   const [values, setValues] = useState({
     title: "",
     body: "",
@@ -14,8 +16,8 @@ const CreatePost = () => {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    if(url !== '') {
-      newPost()
+    if (url !== "") {
+      newPost();
     }
   }, [url]);
 
@@ -29,7 +31,7 @@ const CreatePost = () => {
     data.append("upload_preset", "sociogram");
     data.append("cloud_name", "manan07");
     imageUploadCloud(data).then((url) => {
-      setUrl( url );
+      setUrl(url);
     });
   };
 
@@ -57,7 +59,7 @@ const CreatePost = () => {
         toast.error(`${response.error}`);
       } else {
         toast.success(`Post created successfully`);
-        console.log(response);
+        history.push("/profile");
       }
     });
   };

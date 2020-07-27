@@ -28,7 +28,7 @@ export const createNewPost = (data, token) => {
     })
     .catch((error) => {
       console.log(error);
-      return error;
+      return error.response.data
     });
 };
 
@@ -54,13 +54,15 @@ export const postById = (token, postId) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(response => {
-    console.log(response.data)
-    return response.data
-  }).catch(error => {
-    console.log(error.response.data)
-    return error.response.data
   })
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+      return error.response.data;
+    });
 };
 
 export const getusersPosts = (token) => {
@@ -114,6 +116,23 @@ export const unlikePost = (token, postId) => {
 export const makeComment = (token, data) => {
   console.log(token, data);
   return Axios.put(`/api/post/addComment`, JSON.stringify(data), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return err.response.data;
+    });
+};
+
+export const postDelete = (token, postId) => {
+  return Axios.delete(`/api/post/delete/${postId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

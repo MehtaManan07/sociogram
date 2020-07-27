@@ -14,6 +14,7 @@ exports.createPost = (req, res) => {
   } else {
     newPost.save((error, post) => {
       if (error) {
+        console.log(error)
         res.status(400).json({ error: "Error while creating the post" });
       } else {
         req.user.password = undefined;
