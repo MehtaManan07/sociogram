@@ -22,6 +22,7 @@ connectDB();
   // Routes
   app.use('/api/auth',require('./server/routes/Auth'))
   app.use('/api/post',require('./server/routes/Post'))
+  app.use('/api/user',require('./server/routes/User'))
 
 const port = process.env.PORT || 5000;
 

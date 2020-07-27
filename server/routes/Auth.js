@@ -2,7 +2,7 @@ const express = require('express');
 const { userRegisterValidator, userLoginValidator } = require('../validators/auth');
 const { runValidation } = require('../validators/index');
 const { register, login } = require('../controllers/Auth');
-const requireLogin = require('../middlewares/requireLogin');
+
 const router = express.Router()
 
 router.post('/register',userRegisterValidator,runValidation, register)
