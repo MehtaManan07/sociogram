@@ -78,12 +78,12 @@ exports.updateLikes = (req, res) => {
     { $push: { likes: req.user._id } },
     { new: true }
   ).exec((error, result) => {
-    if(error) {
-      return res.status(400).json({ error })
+    if (error) {
+      return res.status(400).json({ error });
     } else {
-      return res.json(result)
+      return res.json(result);
     }
-  })
+  });
 };
 exports.unLike = (req, res) => {
   Post.findByIdAndUpdate(
@@ -91,28 +91,36 @@ exports.unLike = (req, res) => {
     { $pull: { likes: req.user._id } },
     { new: true }
   ).exec((error, result) => {
-    if(error) {
-      return res.status(400).json({ error })
+    if (error) {
+      return res.status(400).json({ error });
     } else {
-      return res.json(result)
+      return res.json(result);
     }
-  })
+  });
 };
 
 exports.addComment = (req, res) => {
   const comment = {
     text: req.body.text,
-    user: req.user._id 
+    user: req.user._id,
+  };
+
+  if(comment.text === '') {
+    return res.status(400).json({ error: 'Comment cannot be empty`' })
   }
+  console.log(comment, req.body);
   Post.findByIdAndUpdate(
-    { $pull: { comments: comment } },
+    req.body.postId,
+    { $push: { comments: comment } },
     { new: true }
-  ).populate("comments.user", "_id name")
-  .exec((error, result) => {
-    if(error) {
-      return res.status(400).json({ error })
-    } else {
-      return res.json(result)
-    }
-  })
+  )
+    .populate("comments.user", "_id name")
+    .exec((error, result) => {
+      console.log(error, result);
+      if (error) {
+        return res.status(400).json(error);
+      } else {
+        return res.status(200).json(result);
+      }
+    });
 };

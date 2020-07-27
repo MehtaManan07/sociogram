@@ -1,15 +1,14 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { isAuth } from "../helpers/auth";
 
 const Landing = () => {
-  // const { state, dispatch } = useContext(UserContext);
-  // const history = useHistory()
-  // useEffect(() => {
-  //   if (isAuth()) {
-  //     dispatch({ type: "USER", payload: isAuth().user });
-  //     history.push('/home')
-  //   }
-  // }, []);
+  const history = useHistory();
+  useEffect(() => {
+    if (isAuth()) {
+      history.push("/home");
+    }
+  }, []);
   return (
     <div className="landing">
       <div className="dark-overlay">

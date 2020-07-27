@@ -40,8 +40,13 @@ body {
   margin: 20px auto;
 }
 
-.icons {
-  justify-content: space-between;
+.form-container {
+  display: flex;
+}
+
+.input-form {
+  flex: 1;
+  margin-bottom: 2px;
 }
 
 .auth-card {

@@ -10,6 +10,7 @@ import { reducer, initialState } from "./reducers/userReducer";
 import Landing from "./Pages/Landing";
 import { isAuth } from "./helpers/auth";
 import PrivateRoute from "./components/Auth/PrivateRoute";
+import IndividualPost from "./components/Posts/IndividualPost";
 
 export const UserContext = createContext();
 
@@ -27,6 +28,7 @@ const Routing = () => {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <PrivateRoute path="/profile" component={Profile} />
+      <PrivateRoute path="/singlepost/:postId" component={IndividualPost} />
       <PrivateRoute path="/create/post" component={CreatePost} />
     </Switch>
   );

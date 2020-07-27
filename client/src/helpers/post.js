@@ -65,33 +65,51 @@ export const getusersPosts = (token) => {
 };
 
 export const likePost = (token, postId) => {
-  return Axios.put(`/api/post/like`, JSON.stringify({postId}), {
+  return Axios.put(`/api/post/like`, JSON.stringify({ postId }), {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   })
-  .then(res => {
-    return res.data
-  })
-  .catch(err => {
-    console.log(err.response)
-    return err
-  })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return err;
+    });
 };
 
 export const unlikePost = (token, postId) => {
-  return Axios.put(`/api/post/unlike`, JSON.stringify({postId}), {
+  return Axios.put(`/api/post/unlike`, JSON.stringify({ postId }), {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   })
-  .then(res => {
-    return res.data
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return err;
+    });
+};
+
+export const makeComment = (token, data) => {
+  console.log(token,data)
+  return Axios.put(`/api/post/addComment`, JSON.stringify(data), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
-  .catch(err => {
-    console.log(err.response)
-    return err
-  })
+    .then((response) => {
+      console.log(response)
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err.response);
+      return err.response.data
+    });
 };

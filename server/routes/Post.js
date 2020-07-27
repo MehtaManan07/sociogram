@@ -17,6 +17,6 @@ router.post("/create", requireLogin, createPost);
 
 router.put("/like", requireLogin, updateLikes);
 router.put("/unlike", requireLogin, unLike);
-router.put("/add/comment", requireLogin, addComment);
+router.put("/addComment", requireLogin, addComment);
 
 module.exports = router;
