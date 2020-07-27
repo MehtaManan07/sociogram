@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostBody = ({ post, state }) => {
+const PostBody = ({ post }) => {
   return (
     <div>
       <h6>
@@ -8,7 +8,7 @@ const PostBody = ({ post, state }) => {
           style={{ cursor: "pointer" }}
           onClick={() => alert("take me to his profile")}
         >
-          {state && state.name} {" "} {" "}
+          {post.user && post.user.name} {" "} {" "}
         </strong>
         {post.title}
       </h6>

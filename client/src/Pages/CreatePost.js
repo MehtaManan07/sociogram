@@ -64,7 +64,7 @@ const CreatePost = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
       <CreatePostForm
         onSubmitHandler={onSubmitHandler}
         onTextChangeHandler={onTextChangeHandler}

@@ -32,6 +32,15 @@ body {
   flex-wrap: wrap;
 }
 
+.column1 {
+  float: left;
+  width: 60%;
+}
+.column2 {
+  float: right;
+  width: 40%;
+}
+
 /* Profile posts end */
 
 .home-card {

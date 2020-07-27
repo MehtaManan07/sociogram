@@ -43,7 +43,7 @@ const Register = () => {
         onSubmitHandler={onSubmitHandler}
         onChangeHandler={onChangeHandler}
       />
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
     </>
   );
 };

@@ -44,7 +44,7 @@ const Login = () => {
         values={values}
         onChangeHandler={onChangeHandler}
       />
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
     </>
   );
 };

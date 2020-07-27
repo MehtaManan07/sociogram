@@ -7,11 +7,13 @@ const {
   updateLikes,
   unLike,
   addComment,
+  getPostById,
 } = require("../controllers/Post");
 const router = express.Router();
 
 router.get("/all", requireLogin, getAllPosts);
 router.get("/userPosts", requireLogin, userPosts);
+router.get("/post/:postId", requireLogin, getPostById);
 
 router.post("/create", requireLogin, createPost);
 

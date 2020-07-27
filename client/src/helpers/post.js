@@ -48,6 +48,21 @@ export const fetchAllPosts = (token) => {
     });
 };
 
+export const postById = (token, postId) => {
+  return Axios.get(`/api/post/post/${postId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(response => {
+    console.log(response.data)
+    return response.data
+  }).catch(error => {
+    console.log(error.response.data)
+    return error.response.data
+  })
+};
+
 export const getusersPosts = (token) => {
   return Axios.get(`/api/post/userPosts`, {
     headers: {
@@ -97,7 +112,7 @@ export const unlikePost = (token, postId) => {
 };
 
 export const makeComment = (token, data) => {
-  console.log(token,data)
+  console.log(token, data);
   return Axios.put(`/api/post/addComment`, JSON.stringify(data), {
     headers: {
       "Content-Type": "application/json",
@@ -105,11 +120,11 @@ export const makeComment = (token, data) => {
     },
   })
     .then((response) => {
-      console.log(response)
+      console.log(response);
       return response.data;
     })
     .catch((err) => {
       console.log(err.response);
-      return err.response.data
+      return err.response.data;
     });
 };

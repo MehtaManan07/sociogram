@@ -23,6 +23,18 @@ exports.createPost = (req, res) => {
   }
 };
 
+exports.getPostById = (req,res) => {
+  Post.findById(req.params.postId)
+  .populate("user"," _id name ")
+  .exec((error,post) => {
+    if(error) {
+      return res.status(400).json({ error: `Post not found` })
+    } else {
+      res.status(200).json(post)
+    }
+  })
+}
+
 exports.getAllPosts = (req, res) => {
   Post.find()
     .populate("user", "name _id")
@@ -49,29 +61,6 @@ exports.userPosts = (req, res) => {
     });
 };
 
-// exports.updateLikes = async (req, res) => {
-//   console.log('req.body,',req.body)
-//   try {
-//     const post = await Post.findById(req.body.id);
-//     console.log(post)
-
-//     // Check if the post has already been liked
-//     if (
-//       post.likes.filter(like => like.user.toString() === req.user.id).length > 0
-//     ) {
-//       return res.status(400).json({ msg: 'Post already liked' });
-//     }
-
-//     post.likes.unshift({ user: req.user._id });
-
-//     await post.save();
-
-//     res.json(post.likes);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server Error');
-//   }
-// }
 exports.updateLikes = (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
@@ -85,6 +74,7 @@ exports.updateLikes = (req, res) => {
     }
   });
 };
+
 exports.unLike = (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
@@ -103,20 +93,20 @@ exports.addComment = (req, res) => {
   const comment = {
     text: req.body.text,
     user: req.user._id,
+    name: req.user.name
   };
 
   if(comment.text === '') {
     return res.status(400).json({ error: 'Comment cannot be empty`' })
   }
-  console.log(comment, req.body);
+  console.log(comment);
   Post.findByIdAndUpdate(
     req.body.postId,
     { $push: { comments: comment } },
     { new: true }
   )
-    .populate("comments.user", "_id name")
+    .populate("comments.user", "_id")
     .exec((error, result) => {
-      console.log(error, result);
       if (error) {
         return res.status(400).json(error);
       } else {

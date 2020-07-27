@@ -28,6 +28,7 @@ const postSchema = new mongoose.Schema({
     {
       text: String,
       user: { type: ObjectId, ref: "User" },
+      name: String,
     },
   ],
 });
