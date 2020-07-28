@@ -39,6 +39,8 @@ const ProfileTop = ({ state, myPosts, userId }) => {
             {state && (
               <>
                 <h6> {myPosts.length} Posts </h6>
+                <h6> {myPosts.length} Followers </h6>
+                <h6> {myPosts.length} Following </h6>
               </>
             )}
           </div>
