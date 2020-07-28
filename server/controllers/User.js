@@ -23,6 +23,7 @@ exports.getUserProfile = (req, res) => {
 };
 
 exports.followUser = (req, res) => {
+  console.log(req.body)
   User.findByIdAndUpdate(
     req.body.followId,
     { $push: { followers: req.user._id } },

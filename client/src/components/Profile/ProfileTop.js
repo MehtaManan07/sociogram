@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { isAuth } from "../../helpers/auth";
+import { followUser } from "../../helpers/user";
 
-const ProfileTop = ({ state, myPosts }) => {
+const ProfileTop = ({ state, myPosts, userId }) => {
+  const [buttonText, setButtonText] = useState("Follow"); 
+  const follow = (id) => {
+    followUser(isAuth().token, id).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <div className="profile-top row" style={{ marginBottom: "40px" }}>
       <div className="">
@@ -16,12 +25,22 @@ const ProfileTop = ({ state, myPosts }) => {
         )}
       </div>
       <div className="">
-        <h4> {state ? state.name : "loading"} </h4>
+        <div className="form-contaiqner">
+          <h4 className="input-forma"> {state ? state.name : "loading"} </h4>
+          <button
+            className="btn waves-effect waves-light"
+            onClick={() => follow(userId)}
+          >
+            {buttonText}{" "}
+          </button>
+        </div>
         {myPosts && (
           <div className="profile-follow">
-            <h6> {myPosts.length} Posts </h6>
-            <h6> 10 Followers </h6>
-            <h6> 10 Following </h6>
+            {state && (
+              <>
+                <h6> {myPosts.length} Posts </h6>
+              </>
+            )}
           </div>
         )}
       </div>

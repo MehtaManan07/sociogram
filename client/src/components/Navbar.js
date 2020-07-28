@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link to="/create/post">New Post</Link>
       </li>
       <li>
-        <Link to="/profile">Profile</Link>
+        <Link to={ state && `/profile/${state._id}`}>Profile</Link>
       </li>
       <li>
         <a onClick={() => {
