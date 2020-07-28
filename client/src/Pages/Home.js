@@ -27,12 +27,11 @@ const Home = () => {
   };
 
   const onDeleteClicked = (postId) => {
-    postDelete(isAuth().token,postId)
-    .then(res => {
-      console.log(res)
-    })
-    fetchPosts()
-  }
+    postDelete(isAuth().token, postId).then((res) => {
+      console.log(res);
+    });
+    fetchPosts();
+  };
 
   return (
     <div className="home">
@@ -40,7 +39,9 @@ const Home = () => {
         posts.map((post) => (
           <div key={post._id} className="card home-card">
             <h5>
-              {post.user.name}{" "}
+              <Link to={`/profile/${post.user._id}`} style={{ color: "#000" }}>
+                {post.user.name}{" "}
+              </Link>
               {post.user._id === state._id && (
                 <i
                   className="fa fa-trash"
@@ -78,7 +79,13 @@ const Home = () => {
                 {post.comments &&
                   post.comments.slice(-2).map((comment) => (
                     <li key={comment._id}>
-                      <strong> {comment.name}: </strong> {comment.text}
+                      <Link
+                        to={`/profile/${comment.user}`}
+                        style={{ color: "#000" }}
+                      >
+                        <strong> {comment.name}: </strong>{" "}
+                      </Link>{" "}
+                      {comment.text}
                     </li>
                   ))}
               </ul>
