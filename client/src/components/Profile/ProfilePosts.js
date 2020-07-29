@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 const ProfilePosts = ({ myPosts }) => {
   return (
     <div>
-      {myPosts &&
+      { myPosts && myPosts.length !== 0 ?
         myPosts.map((post) => (
           <Link key={post._id} to={`/singlepost/${post._id}`}>
             <img
@@ -13,7 +14,7 @@ const ProfilePosts = ({ myPosts }) => {
               alt={post.title}
             />
           </Link>
-        ))}
+        )) : <Loader />}
     </div>
   );
 };

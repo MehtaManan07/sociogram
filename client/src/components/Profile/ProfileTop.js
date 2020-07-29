@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { isAuth } from "../../helpers/auth";
 import { followUser } from "../../helpers/user";
+import Loader from "../Loader";
 
 const ProfileTop = ({ state, myPosts, userId }) => {
   const [buttonText, setButtonText] = useState("Follow"); 
@@ -34,17 +35,17 @@ const ProfileTop = ({ state, myPosts, userId }) => {
             {buttonText}{" "}
           </button>
         </div>
-        {myPosts && (
+        {myPosts ? (
           <div className="profile-follow">
-            {state && (
+            {state ? (
               <>
                 <h6> {myPosts.length} Posts </h6>
                 <h6> {myPosts.length} Followers </h6>
                 <h6> {myPosts.length} Following </h6>
               </>
-            )}
+            ) : <Loader />}
           </div>
-        )}
+        ) : <Loader />}
       </div>
     </div>
   );

@@ -6,12 +6,14 @@ import { UserContext } from "../App";
 import Likes from "../components/Posts/Likes";
 import PostBody from "../components/Posts/PostBody";
 import CommentForm from "../components/Posts/CommentForm";
+import Loader from "../components/Loader";
 
 const Home = () => {
   useEffect(() => {
     fetchPosts();
   }, []);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   const { state } = useContext(UserContext);
 
@@ -22,6 +24,7 @@ const Home = () => {
       } else {
         const reversedArray = res.reverse();
         setPosts(reversedArray);
+        setLoading(false)
       }
     });
   };
@@ -35,7 +38,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      {posts &&
+      {posts.length !== 0 ?
         posts.map((post) => (
           <div key={post._id} className="card home-card">
             <h5>
@@ -92,7 +95,7 @@ const Home = () => {
               <CommentForm posts={posts} home setPosts={setPosts} post={post} />
             </div>
           </div>
-        ))}
+        )) : <Loader /> }
     </div>
   );
 };
