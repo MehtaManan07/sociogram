@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { isAuth } from "../../helpers/auth";
-import { followUser } from "../../helpers/user";
 import Loader from "../Loader";
 
-const ProfileTop = ({ state, myPosts, userId }) => {
-  const [buttonText, setButtonText] = useState("Follow"); 
-  const follow = (id) => {
-    followUser(isAuth().token, id).then((res) => {
-      console.log(res);
-    });
-  };
+const ProfileTop = ({ state, myPosts, userId, user }) => {
+
+
 
   return (
     <div className="profile-top row" style={{ marginBottom: "40px" }}>
@@ -22,18 +17,12 @@ const ProfileTop = ({ state, myPosts, userId }) => {
             //   style={{ width: '160px', height: '160px', borderRadius: '80px' }}
           />
         ) : (
-          "Loading"
+          <Loader />
         )}
       </div>
       <div className="">
         <div className="form-contaiqner">
-          <h4 className="input-forma"> {state ? state.name : "loading"} </h4>
-          <button
-            className="btn waves-effect waves-light"
-            onClick={() => follow(userId)}
-          >
-            {buttonText}{" "}
-          </button>
+          <h4 className="input-forma"> {user ? user.name : <Loader />} </h4>
         </div>
         {myPosts ? (
           <div className="profile-follow">
@@ -43,9 +32,13 @@ const ProfileTop = ({ state, myPosts, userId }) => {
                 <h6> {myPosts.length} Followers </h6>
                 <h6> {myPosts.length} Following </h6>
               </>
-            ) : <Loader />}
+            ) : (
+              <Loader />
+            )}
           </div>
-        ) : <Loader />}
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

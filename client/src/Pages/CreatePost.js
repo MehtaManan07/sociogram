@@ -59,7 +59,7 @@ const CreatePost = () => {
         toast.error(`${response.error}`);
       } else {
         toast.success(`Post created successfully`);
-        history.push("/profile");
+        history.push(`/profile/${isAuth().user._id}`);
       }
     });
   };
