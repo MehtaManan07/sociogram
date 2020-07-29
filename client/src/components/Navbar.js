@@ -23,7 +23,7 @@ const Navbar = () => {
         {  state && <Link to={`/profile/${state._id}`}>Profile</Link>}
       </li>
       <li>
-        <a onClick={() => {
+        <a href="#" onClick={() => {
           localStorage.removeItem('jwt')
           dispatch({ type: 'LOGOUT' })
         }} style={{ cursor: 'pointer' }}>Logout</a>

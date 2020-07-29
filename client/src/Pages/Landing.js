@@ -8,6 +8,7 @@ const Landing = () => {
     if (isAuth()) {
       history.push("/home");
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="landing">

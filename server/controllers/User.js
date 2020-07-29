@@ -28,16 +28,16 @@ exports.followUser = (req, res) => {
     req.body.followId,
     { $push: { followers: req.user._id } },
     { new: true },
-    (error, result) => {
+    (error, following) => {
       if (error) {
         return res.status(422).json({ error });
       }
       User.findByIdAndUpdate(req.user._id,{ $push: { following: req.body.followId } },
-        { new: true },(error,response) => {
+        { new: true },(error,follower) => {
           if (error) {
             return res.status(422).json({ error });
           }
-          res.status(200).json(response)
+          res.status(200).json(follower, following)
         })
     }
   );
@@ -48,16 +48,16 @@ exports.unfollowUser = (req, res) => {
     req.body.unfollowId,
     { $pull: { followers: req.user._id } },
     { new: true },
-    (error, result) => {
+    (error, unfollowing) => {
       if (error) {
         return res.status(422).json({ error });
       }
       User.findByIdAndUpdate(req.user._id,{ $pull: { following: req.body.unfollowId } },
-        { new: true },(error,response) => {
+        { new: true },(error,unfollower) => {
           if (error) {
             return res.status(422).json({ error });
           }
-          res.status(200).json(response)
+          res.status(200).json(unfollower,unfollowing)
         })
     }
   );

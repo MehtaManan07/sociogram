@@ -12,9 +12,9 @@ const ProfileTop = ({ state, myPosts, userId, user }) => {
         {state ? (
           <img
             className="profileImg"
-            src="https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             alt="name"
-            //   style={{ width: '160px', height: '160px', borderRadius: '80px' }}
+              // style={{ width: '160px', height: '160px', borderRadius: '80px' }}
           />
         ) : (
           <Loader />
