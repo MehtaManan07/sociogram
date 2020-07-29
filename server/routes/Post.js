@@ -9,6 +9,7 @@ const {
   addComment,
   getPostById,
   deletePost,
+  deleteComment,
 } = require("../controllers/Post");
 const router = express.Router();
 
@@ -23,5 +24,7 @@ router.put("/unlike", requireLogin, unLike);
 router.put("/addComment", requireLogin, addComment);
 
 router.delete('/delete/:postId', requireLogin, deletePost)
+router.delete('/delete/comment/:postId/:commentId', requireLogin, deleteComment)
 
 module.exports = router;
+// /:postId/:commentId

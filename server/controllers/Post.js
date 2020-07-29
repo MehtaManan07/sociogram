@@ -121,6 +121,36 @@ exports.addComment = (req, res) => {
     });
 };
 
+exports.deleteComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+
+    // Pull out comment
+    const commentToDelete = post.comments.find(
+      (comment) => comment.id === req.params.commentId
+    );
+
+    // Make sure comment exists
+    if (!commentToDelete) {
+      return res.status(404).json({ msg: "Comment does not exist" });
+    }
+
+    // Get remove index
+    const removeIndex = post.comments
+      .map((comment) => comment.id)
+      .indexOf(req.params.commentId);
+
+    post.comments.splice(removeIndex, 1);
+
+    await post.save();
+
+    res.json({ commentToDelete, post });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
 exports.deletePost = (req, res) => {
   Post.findOne({ _id: req.params.postId })
     .populate("user", "_id")
