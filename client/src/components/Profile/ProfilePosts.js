@@ -5,7 +5,7 @@ import Loader from "../Loader";
 const ProfilePosts = ({ myPosts }) => {
   return (
     <div>
-      { myPosts && myPosts.length !== 0 ?
+      { myPosts ?
         myPosts.map((post) => (
           <Link key={post._id} to={`/singlepost/${post._id}`}>
             <img

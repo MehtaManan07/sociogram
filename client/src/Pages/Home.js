@@ -30,6 +30,7 @@ const Home = () => {
   };
 
   const onDeleteClicked = (postId) => {
+    alert("Are you sure? This cannot be undone...")
     postDelete(isAuth().token, postId).then((res) => {
       console.log(res);
     });
@@ -54,9 +55,12 @@ const Home = () => {
               )}
             </h5>
             <div className="card-image">
+            {
+              post.image ? 
               <Link to={`/singlepost/${post._id}`}>
                 <img src={post.image} alt="postImage" />
-              </Link>
+              </Link> : <Loader />
+            }
             </div>
             <div className="card-content">
               <div className="likes">

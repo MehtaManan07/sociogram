@@ -17,6 +17,11 @@ body {
   border-radius: 80px;
 }
 
+.comments {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
 .profile-follow {
   display: flex;
   justify-content: space-between;

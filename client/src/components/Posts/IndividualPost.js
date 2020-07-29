@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, Fragment } from "react";
 import { isAuth } from "../../helpers/auth";
 import { UserContext } from "../../App";
 import { postById } from "../../helpers/post";
 import Likes from "./Likes";
 import CommentForm from "./CommentForm";
 import Loader from "../Loader";
+import PostBody from "./PostBody";
 
 const IndividualPost = ({ match }) => {
   const [post, setPost] = useState([]);
@@ -36,16 +37,18 @@ const IndividualPost = ({ match }) => {
         {post.user && (
           <div className="column2" style={{ padding: "20px" }}>
             <div className="title" style={{ padding: "2px" }}>
-              <h5> {post.user.name} </h5>
+              {post && <PostBody post={post} />}
             </div>
             <hr />
             <div className="comments">
               <ul>
                 {post.comments &&
                   post.comments.map((comment) => (
-                    <li key={comment._id} style={{ paddingBottom: "3px" }}>
+                    <Fragment key={comment._id}>
+                    <li style={{ paddingBottom: "3px" }}>
                       <strong> {comment.name}: </strong> {comment.text}
                     </li>
+                    </Fragment>
                   ))}
               </ul>
             </div>
