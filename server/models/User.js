@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   date: {
     type: Date,
-    default: moment().format("DD MM YYYY"),
+    default: Date.now,
   },
   followers: [
     { type: ObjectId, ref: "User" }

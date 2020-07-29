@@ -22,7 +22,7 @@ const postSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: moment().format("DD MM YYYY"),
+    default: Date.now,
   },
   likes: [{ type: ObjectId, ref: "User" }],
   comments: [
@@ -32,7 +32,7 @@ const postSchema = new mongoose.Schema({
       name: String,
       date: {
         type: Date,
-        default: moment().format("DD MM YYYY"),
+        default: Date.now,
       }
     },
   ],

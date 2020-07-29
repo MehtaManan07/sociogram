@@ -45,9 +45,9 @@ const IndividualPost = ({ match }) => {
                 {post.comments &&
                   post.comments.map((comment) => (
                     <Fragment key={comment._id}>
-                    <li style={{ paddingBottom: "3px" }}>
-                      <strong> {comment.name}: </strong> {comment.text}
-                    </li>
+                    <p style={{ paddingBottom: "3px" }}>
+                      <><strong> {comment.name}: </strong> {comment.text}</>
+                    </p>
                     </Fragment>
                   ))}
               </ul>
