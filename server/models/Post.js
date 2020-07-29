@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+const moment = require('moment');
 const postSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -21,7 +22,7 @@ const postSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: moment().format("DD MM YYYY"),
   },
   likes: [{ type: ObjectId, ref: "User" }],
   comments: [
@@ -29,6 +30,10 @@ const postSchema = new mongoose.Schema({
       text: String,
       user: { type: ObjectId, ref: "User" },
       name: String,
+      date: {
+        type: Date,
+        default: moment().format("DD MM YYYY"),
+      }
     },
   ],
 });

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require('moment');
 const { ObjectId } = mongoose.Schema.Types
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: moment().format("DD MM YYYY"),
   },
   followers: [
     { type: ObjectId, ref: "User" }

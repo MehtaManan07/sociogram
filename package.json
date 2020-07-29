@@ -22,6 +22,7 @@
     "express-validator": "^6.6.0",
     "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.25",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
