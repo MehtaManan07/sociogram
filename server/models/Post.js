@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-const moment = require('moment');
 const postSchema = new mongoose.Schema({
   title: {
     type: String,

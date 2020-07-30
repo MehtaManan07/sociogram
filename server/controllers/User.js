@@ -55,7 +55,7 @@ exports.unfollowUser = (req, res) => {
     { $pull: { followers: req.user._id } },
     { new: true },
     (error, unfollowingg) => {
-      console.log("unfollowing:\n",unfollowingg, "error:\n",error)
+      console.log("unfollowing:\n", unfollowingg, "error:\n", error);
       if (error) {
         return res.status(422).json({ error });
       }
@@ -67,12 +67,29 @@ exports.unfollowUser = (req, res) => {
           if (error) {
             return res.status(422).json({ error });
           }
-          console.log(unfollower,unfollowingg)
+          console.log(unfollower, unfollowingg);
           unfollower.password = undefined;
           unfollowingg.password = undefined;
           res.status(200).json({ unfollower, unfollowingg });
         }
       );
+    }
+  );
+};
+
+exports.updateProfile = (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.userId,
+    { $set: req.body },
+    { new: true },
+    (error, user) => {
+      if (error) {
+        return res
+          .status(400)
+          .json(error);
+      } 
+      user.password = undefined;
+      res.status(200).json({ user });
     }
   );
 };
