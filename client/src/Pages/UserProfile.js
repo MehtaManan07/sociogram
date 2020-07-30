@@ -29,7 +29,7 @@ const UserProfile = () => {
   };
   return (
     <div style={{ maxWidth: "950px", margin: "10px auto" }}>
-      <ProfileTop myPosts={posts} user={user} userId={id} />
+      <ProfileTop myPosts={posts} setUser={setUser} user={user} userId={id} />
       <hr />
       <ProfilePosts myPosts={posts} />
     </div>

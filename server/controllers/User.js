@@ -31,15 +31,19 @@ exports.followUser = (req, res) => {
       if (error) {
         return res.status(422).json({ error });
       }
-      User.findByIdAndUpdate(req.user._id,{ $push: { following: req.body.followId } },
-        { new: true },(error,follower) => {
+      User.findByIdAndUpdate(
+        req.user._id,
+        { $push: { following: req.body.followId } },
+        { new: true },
+        (error, follower) => {
           if (error) {
             return res.status(422).json({ error });
           }
           follower.password = undefined;
-          followingg.password = undefined
-          res.status(200).json({follower, followingg})
-        })
+          followingg.password = undefined;
+          res.status(200).json({ follower, followingg });
+        }
+      );
     }
   );
 };
@@ -49,19 +53,25 @@ exports.unfollowUser = (req, res) => {
     req.body.unfollowId,
     { $pull: { followers: req.user._id } },
     { new: true },
-    (error, unfollowing) => {
+    (error, unfollowingg) => {
+      console.log("unfollowing:\n",unfollowingg, "error:\n",error)
       if (error) {
         return res.status(422).json({ error });
       }
-      User.findByIdAndUpdate(req.user._id,{ $pull: { following: req.body.unfollowId } },
-        { new: true },(error,unfollower) => {
+      User.findByIdAndUpdate(
+        req.user._id,
+        { $pull: { following: req.body.unfollowId } },
+        { new: true },
+        (error, unfollower) => {
           if (error) {
             return res.status(422).json({ error });
           }
+          console.log(unfollower,unfollowingg)
           unfollower.password = undefined;
-          unfollowing.password = undefined
-          res.status(200).json(unfollower,unfollowing)
-        })
+          unfollowingg.password = undefined;
+          res.status(200).json({ unfollower, unfollowingg });
+        }
+      );
     }
   );
 };

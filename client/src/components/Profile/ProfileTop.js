@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { isAuth } from "../../helpers/auth";
 import Loader from "../Loader";
-import { followUser } from "../../helpers/user";
+import { followUser, unfollowUser } from "../../helpers/user";
 import { UserContext } from "../../App";
 
-const ProfileTop = ({ myPosts, userId, user }) => {
+const ProfileTop = ({ myPosts, setUser, userId, user }) => {
   // console.log(userId, 'state:\n',state,'user:\n', user);
   const { state, dispatch } = useContext(UserContext);
 
@@ -25,24 +25,36 @@ const ProfileTop = ({ myPosts, userId, user }) => {
           followers: response.followingg.followers,
         },
       });
+      setUser(response.followingg);
     });
   };
 
   const unfollow = () => {
-    alert("unFollow");
+    unfollowUser(isAuth().token, userId).then((response) => {
+      console.log(response)
+      dispatch({
+        type: "UPDATE",
+        payload: {
+          followers: response.unfollowingg.following,
+          followers: response.unfollowingg.followers,
+        },
+      });
+      setUser(response.unfollowingg);
+    });
   };
+
+  const FollowButton = () =>
+    state && user.followers && user.followers.includes(state._id) ? (
+      <button className="btn" onClick={unfollow}>Unfollow</button>
+    ) : (
+      <button className="btn" onClick={follow}>Follow</button>
+    );
 
   const displayButton = () =>
     state && state._id === userId ? (
-      <button className="btn" onClick={editProfile}>
-        {" "}
-        Edit Profile{" "}
-      </button>
+      <button className="btn" onClick={editProfile}>Edit Profile</button>
     ) : (
-      <button className="btn" onClick={follow}>
-        {" "}
-        Follow{" "}
-      </button>
+      <FollowButton />
     );
 
   return (
