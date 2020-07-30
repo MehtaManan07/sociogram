@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, profileImage } = req.body;
 
   const user = await User.findOne({ email });
   if (user) {
@@ -15,6 +15,7 @@ exports.register = async (req, res) => {
     name,
     email,
     password,
+    profileImage
   });
 
   const salt = await bcrypt.genSalt(10);

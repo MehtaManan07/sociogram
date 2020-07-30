@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignupForm from "../components/Auth/SignupForm";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { registerUser } from "../helpers/auth";
+import { imageUploadCloud } from "../helpers/post";
 
 const Register = () => {
+  const history = useHistory();
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
+    profileImage: "",
   });
+  const [url, setUrl] = useState("");
 
-  const history = useHistory()
+  useEffect(() => {
+    if (url !== "") {
+      newSignup();
+    }
+  }, [url]);
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    registerUser({
-      name: values.name,
-      password: values.password,
-      email: values.email
-    }).then((response) => {
-      if(response.error) {
-        console.log(response.error)
-        toast.error(`${response.error}`)
-      } else {
-        // toast.success(`Hello ${values.name}, welcome to Sociogram`)
-        setValues({ ...values, name: '', email: '', password: '' })
-        history.push('/login')
-      }
+  const imageChangeHandler = (e) => {
+    setValues({ ...values, profileImage: e.target.files[0] });
+    console.log(values)
+  };
+
+  const uploadImage = () => {
+    console.log("reached uploadImage");
+    const data = new FormData();
+    data.append("file", values.profileImage);
+    data.append("upload_preset", "sociogram");
+    data.append("cloud_name", "manan07");
+    imageUploadCloud(data).then((url) => {
+      setUrl(url);
     });
   };
 
@@ -36,9 +42,37 @@ const Register = () => {
     setValues({ ...values, [name]: e.target.value });
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log("reached onsubmithandler");
+    if (values.profileImage === "") {
+      setUrl(
+        "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553__340.png"
+      );
+    } else uploadImage();
+  };
+
+  const newSignup = () => {
+    console.log("reached newsignup", values.profileImage);
+    registerUser({
+      name: values.name,
+      password: values.password,
+      email: values.email,
+      profileImage: url,
+    }).then((response) => {
+      if (response.error) {
+        console.log(response.error);
+        toast.error(`${response.error}`);
+      } else {
+        history.push("/login");
+      }
+    });
+  };
+
   return (
     <>
       <SignupForm
+        imageChangeHandler={imageChangeHandler}
         values={values}
         onSubmitHandler={onSubmitHandler}
         onChangeHandler={onChangeHandler}

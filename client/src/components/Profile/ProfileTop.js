@@ -63,7 +63,7 @@ const ProfileTop = ({ myPosts, setUser, userId, user }) => {
         {state ? (
           <img
             className="profileImg"
-            src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            src={ user && user.profileImage}
             alt="name"
             // style={{ width: '160px', height: '160px', borderRadius: '80px' }}
           />

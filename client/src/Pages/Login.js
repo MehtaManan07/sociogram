@@ -30,7 +30,7 @@ const Login = () => {
             setValues({ ...values, email: "", password: "" });
             toast.success("hellllooo");
             dispatch({ type: 'USER', payload: isAuth().user })
-            history.push('/home')
+            history.push(`/profile/${isAuth().user._id}`)
           });
         }
       }
