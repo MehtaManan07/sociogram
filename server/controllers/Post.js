@@ -50,6 +50,19 @@ exports.getAllPosts = (req, res) => {
     });
 };
 
+exports.getFollowingPosts = (req, res) => {
+  Post.find({ user: { $in: req.user.following } })
+    .populate("user", "name _id")
+    .exec((error, posts) => {
+      if (error) {
+        console.log(error);
+        res.json({ error: "Error while fetching all posts" });
+      } else {
+        res.json(posts);
+      }
+    });
+};
+
 exports.userPosts = (req, res) => {
   Post.find({ user: req.user._id })
     .populate("user", "_id name")

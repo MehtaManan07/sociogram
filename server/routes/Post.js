@@ -8,12 +8,14 @@ const {
   unLike,
   addComment,
   getPostById,
+  getFollowingPosts,
   deletePost,
   deleteComment,
 } = require("../controllers/Post");
 const router = express.Router();
 
 router.get("/all", requireLogin, getAllPosts);
+router.get("/getFollowing", requireLogin, getFollowingPosts);
 router.get("/userPosts", requireLogin, userPosts);
 router.get("/post/:postId", requireLogin, getPostById);
 

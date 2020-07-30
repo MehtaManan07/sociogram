@@ -48,6 +48,22 @@ export const fetchAllPosts = (token) => {
     });
 };
 
+export const fetchFollowingPosts = (token) => {
+  return Axios.get(`/api/post/getFollowing`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
 export const postById = (token, postId) => {
   return Axios.get(`/api/post/post/${postId}`, {
     headers: {
