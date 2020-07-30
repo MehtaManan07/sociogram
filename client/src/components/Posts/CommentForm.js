@@ -6,7 +6,6 @@ import { isAuth } from "../../helpers/auth";
 
 const CommentForm = ({
   posts,
-  inputComment,
   setPosts,
   setPost,
   post,
@@ -53,7 +52,6 @@ const CommentForm = ({
         <input
           type="text"
           autoFocus={!home}
-          ref={inputComment}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className="input-form"

@@ -31,6 +31,7 @@ exports.getPostById = (req, res) => {
       if (error) {
         return res.status(400).json({ error: `Post not found` });
       } else {
+        post.comments = post.comments.reverse()
         res.status(200).json(post);
       }
     });
@@ -144,7 +145,7 @@ exports.deleteComment = async (req, res) => {
 
     await post.save();
 
-    res.json({ commentToDelete, post });
+    res.json({ comments: post.comments, post, commentToDelete });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

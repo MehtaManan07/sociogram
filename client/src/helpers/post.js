@@ -147,3 +147,20 @@ export const postDelete = (token, postId) => {
       return err.response.data;
     });
 };
+
+export const commentDelete = (token,postId,commentId) => {
+  return Axios.delete(`/api/post/delete/comment/${postId}/${commentId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  .then((response) => {
+    console.log(response);
+    return response.data;
+  })
+  .catch((err) => {
+    console.log(err.response);
+    return err.response.data;
+  });
+}

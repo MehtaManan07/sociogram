@@ -13,7 +13,6 @@ const Home = () => {
     fetchPosts();
   }, []);
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true)
 
   const { state } = useContext(UserContext);
 
@@ -24,7 +23,6 @@ const Home = () => {
       } else {
         const reversedArray = res.reverse();
         setPosts(reversedArray);
-        setLoading(false)
       }
     });
   };
