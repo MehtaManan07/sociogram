@@ -12,6 +12,7 @@ import PrivateRoute from "./components/Auth/PrivateRoute";
 import IndividualPost from "./components/Posts/IndividualPost";
 import UserProfile from "./Pages/Profile/UserProfile";
 import SubPosts from "./Pages/Post/SubPosts";
+import EditProfile from "./Pages/Profile/Edit-Profile";
 
 export const UserContext = createContext();
 
@@ -32,6 +33,7 @@ const Routing = () => {
       <PrivateRoute path="/singlepost/:postId" component={IndividualPost} />
       <PrivateRoute path="/create/post" component={CreatePost} />
       <PrivateRoute path="/profile/:id" component={UserProfile} />
+      <PrivateRoute path="/edit-profile/:id" component={EditProfile} />
     </Switch>
   );
 };

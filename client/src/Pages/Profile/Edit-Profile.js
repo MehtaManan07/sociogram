@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProfile } from "../../helpers/user";
 import { isAuth } from "../../helpers/auth";
-import ProfileTop from "../../components/Profile/ProfileTop";
-import ProfilePosts from "../../components/Profile/ProfilePosts";
 
-const UserProfile = () => {
+const EditProfile = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
 
@@ -20,18 +18,17 @@ const UserProfile = () => {
       if (res.error) {
         console.log(res.error);
       }
-      console.log(res.user)
+      console.log(res.user);
       setUser(res.user);
       setPosts(res.posts);
     });
   };
   return (
-    <div style={{ maxWidth: "950px", margin: "10px auto" }}>
-      <ProfileTop myPosts={posts} setUser={setUser} user={user} userId={id} />
-      <hr />
-      <ProfilePosts myPosts={posts} />
+    <div>
+      <h1>Hello from Edit Profile </h1>
+      {JSON.stringify(user)}
     </div>
   );
 };
 
-export default UserProfile;
+export default EditProfile;

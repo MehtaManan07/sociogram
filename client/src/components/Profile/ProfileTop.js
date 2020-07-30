@@ -3,18 +3,11 @@ import { isAuth } from "../../helpers/auth";
 import Loader from "../Loader";
 import { followUser, unfollowUser } from "../../helpers/user";
 import { UserContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const ProfileTop = ({ myPosts, setUser, userId, user }) => {
   // console.log(userId, 'state:\n',state,'user:\n', user);
   const { state, dispatch } = useContext(UserContext);
-
-  // useEffect(() => {
-
-  // },[])
-
-  const editProfile = () => {
-    alert("editprofile");
-  };
 
   const follow = () => {
     followUser(isAuth().token, userId).then((response) => {
@@ -52,7 +45,9 @@ const ProfileTop = ({ myPosts, setUser, userId, user }) => {
 
   const displayButton = () =>
     state && state._id === userId ? (
-      <button className="btn" onClick={editProfile}>Edit Profile</button>
+      <Link to={`/edit-profile/${userId}`}>
+      <button className="btn">Edit Profile</button>
+      </Link>
     ) : (
       <FollowButton />
     );
