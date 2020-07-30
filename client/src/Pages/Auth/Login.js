@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { UserContext } from '../App'
+import { UserContext } from '../../App'
 import "react-toastify/dist/ReactToastify.min.css";
-import LoginForm from "../components/Auth/LoginForm";
-import { loginUser, authenticate, isAuth } from "../helpers/auth";
+import LoginForm from "../../components/Auth/LoginForm";
+import { loginUser, authenticate, isAuth } from "../../helpers/auth";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {

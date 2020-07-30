@@ -1,17 +1,17 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import CreatePost from "./Pages/CreatePost";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Auth/Login";
+import Register from "./Pages/Auth/Register";
+import CreatePost from "./Pages/Post/CreatePost";
 import { reducer, initialState } from "./reducers/userReducer";
-import Landing from "./Pages/Landing";
+import Landing from "./Pages/Home/Landing";
 import { isAuth } from "./helpers/auth";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import IndividualPost from "./components/Posts/IndividualPost";
-import UserProfile from "./Pages/UserProfile";
-import SubPosts from "./Pages/SubPosts";
+import UserProfile from "./Pages/Profile/UserProfile";
+import SubPosts from "./Pages/Post/SubPosts";
 
 export const UserContext = createContext();
 

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { fetchAllPosts, postDelete } from "../helpers/post";
+import { postDelete, fetchFollowingPosts } from "../../helpers/post";
 import { Link } from "react-router-dom";
-import { isAuth } from "../helpers/auth";
-import { UserContext } from "../App";
-import Likes from "../components/Posts/Likes";
-import PostBody from "../components/Posts/PostBody";
-import CommentForm from "../components/Posts/CommentForm";
-import Loader from "../components/Loader";
+import { isAuth } from "../../helpers/auth";
+import { UserContext } from "../../App";
+import Likes from "../../components/Posts/Likes";
+import PostBody from "../../components/Posts/PostBody";
+import CommentForm from "../../components/Posts/CommentForm";
+import Loader from "../../components/Loader";
 
-const Home = () => {
+const SubPosts = () => {
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -17,7 +17,7 @@ const Home = () => {
   const { state } = useContext(UserContext);
 
   const fetchPosts = () => {
-    fetchAllPosts(isAuth().token).then((res) => {
+    fetchFollowingPosts(isAuth().token).then((res) => {
       if (res.error) {
         console.log(res.error);
       } else {
@@ -28,7 +28,7 @@ const Home = () => {
   };
 
   const onDeleteClicked = (postId) => {
-    alert("Are you sure? This cannot be undone...");
+    alert("Are you sure? This cannot be undone...")
     postDelete(isAuth().token, postId).then((res) => {
       console.log(res);
     });
@@ -37,38 +37,28 @@ const Home = () => {
 
   return (
     <div className="home">
-      {posts.length !== 0 ? (
+      {posts.length !== 0 ? 
         posts.map((post) => (
           <div key={post._id} className="card home-card">
             <h5>
               <Link to={`/profile/${post.user._id}`} style={{ color: "#000" }}>
-                <img
-                  src={post.user.profileImage}
-                  alt="..."
-                  className="avatar"
-                />
-                {post.user.name}
+                {post.user.name}{" "}
               </Link>
+            </h5>
               {post.user._id === state._id && (
                 <i
                   className="fa fa-trash right"
                   onClick={() => onDeleteClicked(post._id)}
-                  style={{
-                    cursor: "pointer",
-                    marginTop: 12,
-                    marginRight: "2px",
-                  }}
+                  style={{ cursor: "pointer", marginTop: 1 }}
                 ></i>
               )}
-            </h5>
             <div className="card-image">
-              {post.image ? (
-                <Link to={`/singlepost/${post._id}`}>
-                  <img src={post.image} alt="postImage" />
-                </Link>
-              ) : (
-                <Loader />
-              )}
+            {
+              post.image ? 
+              <Link to={`/singlepost/${post._id}`}>
+                <img src={post.image} alt="postImage" />
+              </Link> : <Loader />
+            }
             </div>
             <div className="card-content">
               <div className="likes">
@@ -107,12 +97,9 @@ const Home = () => {
               <CommentForm posts={posts} home setPosts={setPosts} post={post} />
             </div>
           </div>
-        ))
-      ) : (
-        <Loader />
-      )}
+        )) : <Loader text="No Posts Found" /> }
     </div>
   );
 };
 
-export default Home;
+export default SubPosts;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getProfile } from "../helpers/user";
-import { isAuth } from "../helpers/auth";
-import ProfileTop from "../components/Profile/ProfileTop";
-import ProfilePosts from "../components/Profile/ProfilePosts";
-import { UserContext } from "../App";
+import { getProfile } from "../../helpers/user";
+import { isAuth } from "../../helpers/auth";
+import ProfileTop from "../../components/Profile/ProfileTop";
+import ProfilePosts from "../../components/Profile/ProfilePosts";
+import { UserContext } from "../../App";
 
 const UserProfile = () => {
   const [user, setUser] = useState([]);

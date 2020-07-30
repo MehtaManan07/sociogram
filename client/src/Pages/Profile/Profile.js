@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import ProfileTop from "../components/Profile/ProfileTop";
-import ProfilePosts from "../components/Profile/ProfilePosts";
+import ProfileTop from "../../components/Profile/ProfileTop";
+import ProfilePosts from "../../components/Profile/ProfilePosts";
 import { getusersPosts } from "../helpers/post";
-import { isAuth } from "../helpers/auth";
-import { UserContext } from '../App'
+import { isAuth } from "../../helpers/auth";
+import { UserContext } from '../../App'
 
 const Profile = () => {
   const [myPosts, setMyPosts] = useState([]);

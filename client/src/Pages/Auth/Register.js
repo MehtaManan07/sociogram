@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SignupForm from "../components/Auth/SignupForm";
+import SignupForm from "../../components/Auth/SignupForm";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { registerUser } from "../helpers/auth";
-import { imageUploadCloud } from "../helpers/post";
+import { registerUser } from "../../helpers/auth";
+import { imageUploadCloud } from "../../helpers/post";
 
 const Register = () => {
   const history = useHistory();

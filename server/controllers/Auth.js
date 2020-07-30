@@ -28,6 +28,7 @@ exports.register = async (req, res) => {
       console.log(error);
       return res.status(500).json({ error: "Error while saving the user" });
     } else {
+      user.password = undefined
       res.status(200).json({ message: `New user created`, user });
     }
   });

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import CreatePostForm from "../components/Posts/CreatePostForm";
+import CreatePostForm from "../../components/Posts/CreatePostForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { imageUploadCloud, createNewPost } from "../helpers/post";
-import { isAuth } from "../helpers/auth";
+import { imageUploadCloud, createNewPost } from "../../helpers/post";
+import { isAuth } from "../../helpers/auth";
 import { useHistory } from "react-router-dom";
 
 const CreatePost = () => {

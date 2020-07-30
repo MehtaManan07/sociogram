@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { isAuth } from "../helpers/auth";
+import { isAuth } from "../../helpers/auth";
 
 const Landing = () => {
   const history = useHistory();
