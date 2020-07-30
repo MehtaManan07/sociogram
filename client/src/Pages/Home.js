@@ -76,7 +76,7 @@ const Home = () => {
                   to={`/singlepost/${post._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  View all comments
+                  View all {post.comments.length} comments
                 </Link>
               )}
 

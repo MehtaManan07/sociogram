@@ -39,19 +39,6 @@ const IndividualPost = ({ match }) => {
     );
   };
 
-  const deleteButton = (post,comment) => {
-    return ( state._id === comment.user ||
-      post.user._id === state._id ? (
-        <i
-          onClick={() =>
-            deleteComment(post._id, comment._id)
-          }
-          className="fa fa-trash right fa-1x"
-          style={{ cursor: "pointer", color: "red" }}
-        ></i>
-      ) : "")
-  }
-
   return (
     <>
       <div className="card large" style={{ margin: "10px 90px" }}>
@@ -78,7 +65,16 @@ const IndividualPost = ({ match }) => {
                     <Fragment key={comment._id}>
                       <p style={{ paddingBottom: "3px" }}>
                         <strong style={{ cursor: "pointer" }} onClick={() => history.push(`/profile/${comment.user}`)}> {comment.name}: </strong> {comment.text}
-                        {deleteButton(post,comment)}
+                        { state._id === comment.user ||
+      post.user._id === state._id ? (
+        <i
+          onClick={() =>
+            deleteComment(post._id, comment._id)
+          }
+          className="fa fa-trash right fa-1x"
+          style={{ cursor: "pointer", color: "red" }}
+        ></i>
+      ) : ""}
                       </p>
                     </Fragment>
                   ))}
