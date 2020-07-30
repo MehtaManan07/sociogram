@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProfile } from "../../helpers/user";
 import { isAuth } from "../../helpers/auth";
+import EditProfileHeader from "../../components/Profile/EditProfileHeader";
+import EditProfileForm from "../../components/Profile/EditProfileForm";
 
 const EditProfile = () => {
   const [user, setUser] = useState([]);
@@ -24,8 +26,9 @@ const EditProfile = () => {
     });
   };
   return (
-    <div>
-      <h1>Hello from Edit Profile </h1>
+    <div className="card" style={{ margin: '15px 20px' }}>
+      <EditProfileHeader user={user} />
+      <EditProfileForm user={user} />
       {JSON.stringify(user)}
     </div>
   );
