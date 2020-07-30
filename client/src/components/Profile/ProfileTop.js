@@ -60,7 +60,7 @@ const ProfileTop = ({ myPosts, setUser, userId, user }) => {
   return (
     <div className="profile-top row" style={{ marginBottom: "40px" }}>
       <div className="">
-        {state ? (
+        {state && user.profileImage ? (
           <img
             className="profileImg"
             src={ user && user.profileImage}

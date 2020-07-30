@@ -6,20 +6,20 @@ import Likes from "./Likes";
 import CommentForm from "./CommentForm";
 import Loader from "../Loader";
 import PostBody from "./PostBody";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const IndividualPost = ({ match }) => {
   const [post, setPost] = useState([]);
   const { state } = useContext(UserContext);
 
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     getPost(match.params.postId);
   }, [setPost]);
 
   const getPost = (postId) => {
-    console.log('poicha')
+    console.log("poicha");
     postById(isAuth().token, postId).then((res) => {
       if (res.error) {
         console.error(res.error);
@@ -31,12 +31,9 @@ const IndividualPost = ({ match }) => {
 
   const deleteComment = (postId, commentId) => {
     alert("Are you sure? This cannot be undone");
-    commentDelete(isAuth().token, postId, commentId).then((res) =>
-      {
-
-        setPost(res.post)
-      }
-    );
+    commentDelete(isAuth().token, postId, commentId).then((res) => {
+      setPost(res.post);
+    });
   };
 
   return (
@@ -55,7 +52,18 @@ const IndividualPost = ({ match }) => {
         {post.user && (
           <div className="column2" style={{ padding: "20px" }}>
             <div className="title" style={{ padding: "2px" }}>
-              {post && <PostBody post={post} />}
+              {post && (
+                <>
+                  <Link to={`/profile/${post.user._id}`}>
+                    <img
+                      src={post.user.profileImage}
+                      alt="..."
+                      className="avatar left"
+                    />
+                  </Link>
+                  <PostBody post={post} />
+                </>
+              )}
             </div>
             <hr />
             <div className="comments">
@@ -64,17 +72,26 @@ const IndividualPost = ({ match }) => {
                   post.comments.map((comment) => (
                     <Fragment key={comment._id}>
                       <p style={{ paddingBottom: "3px" }}>
-                        <strong style={{ cursor: "pointer" }} onClick={() => history.push(`/profile/${comment.user}`)}> {comment.name}: </strong> {comment.text}
-                        { state._id === comment.user ||
-      post.user._id === state._id ? (
-        <i
-          onClick={() =>
-            deleteComment(post._id, comment._id)
-          }
-          className="fa fa-trash right fa-1x"
-          style={{ cursor: "pointer", color: "red" }}
-        ></i>
-      ) : ""}
+                        <strong
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            history.push(`/profile/${comment.user}`)
+                          }
+                        >
+                          {" "}
+                          {comment.name}:{" "}
+                        </strong>{" "}
+                        {comment.text}
+                        {state._id === comment.user ||
+                        post.user._id === state._id ? (
+                          <i
+                            onClick={() => deleteComment(post._id, comment._id)}
+                            className="fa fa-trash right fa-1x"
+                            style={{ cursor: "pointer", color: "red" }}
+                          ></i>
+                        ) : (
+                          ""
+                        )}
                       </p>
                     </Fragment>
                   ))}

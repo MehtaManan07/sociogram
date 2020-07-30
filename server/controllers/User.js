@@ -12,7 +12,7 @@ exports.getUserProfile = (req, res) => {
         return res.status(404).json({ error: "User not found" });
       }
       Post.find({ user: req.params.id })
-        .populate("user", "_id name")
+        .populate("user", "_id name profileImage")
         .exec((error, posts) => {
           if (error) {
             return res.status(400).json(error);

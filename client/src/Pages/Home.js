@@ -28,7 +28,7 @@ const Home = () => {
   };
 
   const onDeleteClicked = (postId) => {
-    alert("Are you sure? This cannot be undone...")
+    alert("Are you sure? This cannot be undone...");
     postDelete(isAuth().token, postId).then((res) => {
       console.log(res);
     });
@@ -37,28 +37,38 @@ const Home = () => {
 
   return (
     <div className="home">
-      {posts.length !== 0 ?
+      {posts.length !== 0 ? (
         posts.map((post) => (
           <div key={post._id} className="card home-card">
             <h5>
               <Link to={`/profile/${post.user._id}`} style={{ color: "#000" }}>
-                {post.user.name}{" "}
+                <img
+                  src={post.user.profileImage}
+                  alt="..."
+                  className="avatar"
+                />
+                {post.user.name}
               </Link>
               {post.user._id === state._id && (
                 <i
                   className="fa fa-trash right"
                   onClick={() => onDeleteClicked(post._id)}
-                  style={{ cursor: "pointer", marginTop: 1 }}
+                  style={{
+                    cursor: "pointer",
+                    marginTop: 12,
+                    marginRight: "2px",
+                  }}
                 ></i>
               )}
             </h5>
             <div className="card-image">
-            {
-              post.image ? 
-              <Link to={`/singlepost/${post._id}`}>
-                <img src={post.image} alt="postImage" />
-              </Link> : <Loader />
-            }
+              {post.image ? (
+                <Link to={`/singlepost/${post._id}`}>
+                  <img src={post.image} alt="postImage" />
+                </Link>
+              ) : (
+                <Loader />
+              )}
             </div>
             <div className="card-content">
               <div className="likes">
@@ -97,7 +107,10 @@ const Home = () => {
               <CommentForm posts={posts} home setPosts={setPosts} post={post} />
             </div>
           </div>
-        )) : <Loader /> }
+        ))
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

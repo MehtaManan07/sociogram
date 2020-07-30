@@ -28,7 +28,6 @@ const Register = () => {
   };
 
   const uploadImage = () => {
-    console.log("reached uploadImage");
     const data = new FormData();
     data.append("file", values.profileImage);
     data.append("upload_preset", "sociogram");
@@ -44,7 +43,6 @@ const Register = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log("reached onsubmithandler");
     if (values.profileImage === "") {
       setUrl(
         "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553__340.png"
@@ -53,7 +51,6 @@ const Register = () => {
   };
 
   const newSignup = () => {
-    console.log("reached newsignup", values.profileImage);
     registerUser({
       name: values.name,
       password: values.password,
