@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
 const { ObjectId } = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,6 +15,10 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   bio: {
+    type: String,
+    default: "",
+  },
+  username: {
     type: String,
     default: "",
   },
