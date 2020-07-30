@@ -23,12 +23,11 @@ exports.getUserProfile = (req, res) => {
 };
 
 exports.followUser = (req, res) => {
-  console.log(req.body)
   User.findByIdAndUpdate(
     req.body.followId,
     { $push: { followers: req.user._id } },
     { new: true },
-    (error, following) => {
+    (error, followingg) => {
       if (error) {
         return res.status(422).json({ error });
       }
@@ -37,7 +36,9 @@ exports.followUser = (req, res) => {
           if (error) {
             return res.status(422).json({ error });
           }
-          res.status(200).json(follower, following)
+          follower.password = undefined;
+          followingg.password = undefined
+          res.status(200).json({follower, followingg})
         })
     }
   );
@@ -57,6 +58,8 @@ exports.unfollowUser = (req, res) => {
           if (error) {
             return res.status(422).json({ error });
           }
+          unfollower.password = undefined;
+          unfollowing.password = undefined
           res.status(200).json(unfollower,unfollowing)
         })
     }

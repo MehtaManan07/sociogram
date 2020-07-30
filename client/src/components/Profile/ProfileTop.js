@@ -1,10 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { isAuth } from "../../helpers/auth";
 import Loader from "../Loader";
+import { followUser } from "../../helpers/user";
+import { UserContext } from "../../App";
 
-const ProfileTop = ({ state, myPosts, userId, user }) => {
+const ProfileTop = ({ myPosts, userId, user }) => {
+  // console.log(userId, 'state:\n',state,'user:\n', user);
+  const { state, dispatch } = useContext(UserContext);
 
+  // useEffect(() => {
 
+  // },[])
+
+  const editProfile = () => {
+    alert("editprofile");
+  };
+
+  const follow = () => {
+    followUser(isAuth().token, userId).then((response) => {
+      dispatch({
+        type: "UPDATE",
+        payload: {
+          followers: response.followingg.following,
+          followers: response.followingg.followers,
+        },
+      });
+    });
+  };
+
+  const unfollow = () => {
+    alert("unFollow");
+  };
+
+  const displayButton = () =>
+    state && state._id === userId ? (
+      <button className="btn" onClick={editProfile}>
+        {" "}
+        Edit Profile{" "}
+      </button>
+    ) : (
+      <button className="btn" onClick={follow}>
+        {" "}
+        Follow{" "}
+      </button>
+    );
 
   return (
     <div className="profile-top row" style={{ marginBottom: "40px" }}>
@@ -14,7 +53,7 @@ const ProfileTop = ({ state, myPosts, userId, user }) => {
             className="profileImg"
             src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
             alt="name"
-              // style={{ width: '160px', height: '160px', borderRadius: '80px' }}
+            // style={{ width: '160px', height: '160px', borderRadius: '80px' }}
           />
         ) : (
           <Loader />
@@ -23,14 +62,15 @@ const ProfileTop = ({ state, myPosts, userId, user }) => {
       <div className="">
         <div className="form-contaiqner">
           <h4 className="input-forma"> {user ? user.name : <Loader />} </h4>
+          {displayButton()}
         </div>
         {myPosts ? (
           <div className="profile-follow">
             {state ? (
               <>
                 <h6> {myPosts.length} Posts </h6>
-                <h6> {myPosts.length} Followers </h6>
-                <h6> {myPosts.length} Following </h6>
+                <h6> {user.followers && user.followers.length} Followers </h6>
+                <h6> {user.following && user.following.length} Following </h6>
               </>
             ) : (
               <Loader />
