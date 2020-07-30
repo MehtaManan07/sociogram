@@ -1,10 +1,10 @@
 import React from "react";
 
-const Loader = () => {
+const Loader = ({ text = "" }) => {
   return (
-    <>
+    <div style={{ position: "fixed", top: "50%", left: "50%"}}>
       <div
-       style={{ position: "fixed", top: "50%", left: "50%"}}
+       
         className="preloader-wrapper big active"
       >
         <div className="spinner-layer spinner-blue-only">
@@ -19,7 +19,8 @@ const Loader = () => {
           </div>
         </div>
       </div>
-    </>
+        {text}
+    </div>
   );
 };
 

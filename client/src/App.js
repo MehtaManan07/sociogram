@@ -11,6 +11,7 @@ import { isAuth } from "./helpers/auth";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import IndividualPost from "./components/Posts/IndividualPost";
 import UserProfile from "./Pages/UserProfile";
+import SubPosts from "./Pages/SubPosts";
 
 export const UserContext = createContext();
 
@@ -25,6 +26,7 @@ const Routing = () => {
     <Switch>
       <Route exact path="/" component={Landing} />
       <PrivateRoute path="/home" exact component={Home} />
+      <PrivateRoute path="/subPosts" exact component={SubPosts} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <PrivateRoute path="/singlepost/:postId" component={IndividualPost} />
