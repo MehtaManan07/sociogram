@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getProfile } from "../../helpers/user";
 import { isAuth } from "../../helpers/auth";
 import EditProfileHeader from "../../components/Profile/EditProfileHeader";
 import EditProfileForm from "../../components/Profile/EditProfileForm";
+import FourOThree from "../Errors/500";
+import { UserContext } from "../../App";
 
 const EditProfile = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
+
+  const {state,dispatch} = useContext(UserContext)
 
   const { id } = useParams();
 
@@ -26,11 +30,14 @@ const EditProfile = () => {
     });
   };
   return (
+    <>
+    { state && id === state._id ? 
     <div className="card" style={{ margin: '15px 20px' }}>
       <EditProfileHeader user={user} />
       <EditProfileForm user={user} />
       {JSON.stringify(user)}
-    </div>
+    </div> : state && <FourOThree id={state._id} />}
+    </>
   );
 };
 

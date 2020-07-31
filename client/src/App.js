@@ -13,6 +13,8 @@ import IndividualPost from "./components/Posts/IndividualPost";
 import UserProfile from "./Pages/Profile/UserProfile";
 import SubPosts from "./Pages/Post/SubPosts";
 import EditProfile from "./Pages/Profile/Edit-Profile";
+import FourOThree from './Pages/Errors/500'
+import FourOFour from "./Pages/Errors/404";
 
 export const UserContext = createContext();
 
@@ -34,6 +36,8 @@ const Routing = () => {
       <PrivateRoute path="/create/post" component={CreatePost} />
       <PrivateRoute path="/profile/:id" component={UserProfile} />
       <PrivateRoute path="/edit-profile/:id" component={EditProfile} />
+      <PrivateRoute path="/403/forbidden" component={FourOThree} />
+      <PrivateRoute component={FourOFour} />
     </Switch>
   );
 };
