@@ -6,7 +6,7 @@ const PostBody = ({ post }) => {
     <Link to={`/profile/${post.user._id}`} style={{ color: "#000" }}>
       <h6>
         <strong style={{ cursor: "pointer" }}>
-          {post.user && post.user.name}{" "}
+          {post.user && post.user.username}{" "}
         </strong>
         {post.title}
       </h6>

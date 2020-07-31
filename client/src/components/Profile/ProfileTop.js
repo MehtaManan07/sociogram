@@ -68,7 +68,7 @@ const ProfileTop = ({ myPosts, setUser, userId, user }) => {
       </div>
       <div className="">
         <div className="form-contaiqner">
-          <h4 className="input-forma"> {user ? user.name : <Loader />} </h4>
+          <h4 className="input-forma"> {user ? user.username : <Loader />} </h4>
           {displayButton()}
         </div>
         {myPosts ? (

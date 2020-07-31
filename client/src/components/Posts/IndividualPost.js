@@ -78,7 +78,6 @@ const IndividualPost = ({ match }) => {
                             history.push(`/profile/${comment.user}`)
                           }
                         >
-                          {" "}
                           {comment.name}:{" "}
                         </strong>{" "}
                         {comment.text}

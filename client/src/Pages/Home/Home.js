@@ -47,7 +47,7 @@ const Home = () => {
                   alt="..."
                   className="avatar"
                 />
-                {post.user.name}
+                {post.user.username}
               </Link>
               {post.user._id === state._id && (
                 <i

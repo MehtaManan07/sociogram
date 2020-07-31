@@ -26,7 +26,7 @@ exports.createPost = (req, res) => {
 
 exports.getPostById = (req, res) => {
   Post.findById(req.params.postId)
-    .populate("user", " _id name profileImage ")
+    .populate("user", " _id name profileImage username ")
     .exec((error, post) => {
       if (error) {
         return res.status(400).json({ error: `Post not found` });
@@ -39,7 +39,7 @@ exports.getPostById = (req, res) => {
 
 exports.getAllPosts = (req, res) => {
   Post.find()
-    .populate("user", "name _id profileImage")
+    .populate("user", "name _id profileImage username")
     .exec((error, posts) => {
       if (error) {
         console.log(error);
@@ -52,7 +52,7 @@ exports.getAllPosts = (req, res) => {
 
 exports.getFollowingPosts = (req, res) => {
   Post.find({ user: { $in: req.user.following } })
-    .populate("user", "name _id profileImage")
+    .populate("user", "name _id profileImage username")
     .exec((error, posts) => {
       if (error) {
         console.log(error);
@@ -65,7 +65,7 @@ exports.getFollowingPosts = (req, res) => {
 
 exports.userPosts = (req, res) => {
   Post.find({ user: req.user._id })
-    .populate("user", "_id name profileImage")
+    .populate("user", "_id name profileImage username")
     .exec((error, userPost) => {
       if (error) {
         console.log(error);
@@ -82,7 +82,7 @@ exports.updateLikes = (req, res) => {
     { $push: { likes: req.user._id } },
     { new: true }
   )
-    .populate("user", "name _id profileImage")
+    .populate("user", "name _id profileImage username")
     .exec((error, result) => {
       if (error) {
         return res.status(400).json({ error });
@@ -98,7 +98,7 @@ exports.unLike = (req, res) => {
     { $pull: { likes: req.user._id } },
     { new: true }
   )
-    .populate("user", "name _id profileImage")
+    .populate("user", "name _id profileImage username")
     .exec((error, result) => {
       if (error) {
         return res.status(400).json({ error });
@@ -124,7 +124,7 @@ exports.addComment = (req, res) => {
     { $push: { comments: comment } },
     { new: true }
   )
-    .populate("user", "name _id profileImage")
+    .populate("user", "name _id profileImage username")
     .populate("comments.user", "_id ")
     .exec((error, result) => {
       if (error) {
