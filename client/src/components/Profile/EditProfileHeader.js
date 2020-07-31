@@ -15,7 +15,7 @@ const EditProfileHeader = ({ user }) => {
             <p>
               username: <strong>{user.username}</strong>
             </p>
-            <button className="btn"> Change Image </button>
+            <button className="btn"> Change Profile Photo </button>
           </div>
           <div className="col s1.5 right">
             <p>

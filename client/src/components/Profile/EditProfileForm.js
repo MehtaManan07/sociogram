@@ -79,14 +79,14 @@ const EditProfileForm = ({
            Submit
             <i className="material-icons right">send</i>
           </button>
-          <button
+          <Link
           style={{ marginLeft: 7 }}
             className="btn waves-effect waves-light"
-            type="submit"
+            to={`/profile/${user._id}`}
           >
            Cancel
             <i className="material-icons right">send</i>
-          </button>
+          </Link>
         </form>
     </div>
   );
