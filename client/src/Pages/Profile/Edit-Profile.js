@@ -11,13 +11,15 @@ const EditProfile = () => {
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
 
-  const {state,dispatch} = useContext(UserContext)
+  const { state, dispatch } = useContext(UserContext);
 
   const { id } = useParams();
 
   useEffect(() => {
     loadProfile();
   }, [id]);
+
+  const imageChangeHandler = () => {};
 
   const loadProfile = () => {
     getProfile(isAuth().token, id).then((res) => {
@@ -31,12 +33,17 @@ const EditProfile = () => {
   };
   return (
     <>
-    { state && id === state._id ? 
-    <div className="card" style={{ margin: '15px 20px' }}>
-      <EditProfileHeader user={user} />
-      <EditProfileForm user={user} />
-      {JSON.stringify(user)}
-    </div> : state && <FourOThree id={state._id} />}
+      {state && id === state._id ? (
+        <div className="card" style={{ margin: "15px 20px" }}>
+          <EditProfileHeader
+            imageChangeHandler={imageChangeHandler}
+            user={user}
+          />
+          <EditProfileForm user={user} />
+        </div>
+      ) : (
+        state && <FourOThree id={state._id} />
+      )}
     </>
   );
 };

@@ -32,7 +32,7 @@ export const loginUser = (data) => {
 export const authenticate = (data, next) => {
   console.log(data)
   if (typeof window !== "undefined") {
-    localStorage.setItem("jwt", JSON.stringify(data));
+    localStorage.setItem("jwtSocio", JSON.stringify(data));
     next();
   }
 };
@@ -41,7 +41,7 @@ export const isAuth = () => {
   if (typeof window == "undefined") {
     return false;
   }
-  if (localStorage.getItem("jwt")) {
-    return JSON.parse(localStorage.getItem("jwt"));
+  if (localStorage.getItem("jwtSocio")) {
+    return JSON.parse(localStorage.getItem("jwtSocio"));
   } else return false;
 };

@@ -98,7 +98,7 @@ const Home = () => {
                         to={`/profile/${comment.user}`}
                         style={{ color: "#000" }}
                       >
-                        <strong> {comment.name}: </strong>{" "}
+                        <strong> {comment.name}: </strong>
                       </Link>{" "}
                       {comment.text}
                     </li>

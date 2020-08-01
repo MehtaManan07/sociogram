@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" })
     }
 
     //Compare the password

@@ -24,7 +24,7 @@ const Navbar = () => {
       </li>
       <li>
         <a href="#" onClick={() => {
-          localStorage.removeItem('jwt')
+          localStorage.removeItem('jwtSocio')
           dispatch({ type: 'LOGOUT' })
         }} style={{ cursor: 'pointer' }}>Logout</a>
       </li>

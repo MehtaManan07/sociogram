@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import Loader from "../Loader";
 
-const EditProfileHeader = ({ user }) => {
+const EditProfileHeader = ({ user, imageChangeHandler }) => {
   return (
     <div className="row" style={{ padding: "25px" }}>
       {user ? (
@@ -15,7 +15,19 @@ const EditProfileHeader = ({ user }) => {
             <p>
               username: <strong>{user.username}</strong>
             </p>
-            <button className="btn"> Change Profile Photo </button>
+            <div className="file-field input-field">
+            <div className="btn">
+              <span> Change Image </span>
+              <input type="file" onChange={imageChangeHandler} />
+            </div>
+            <div className="file-path-wrapper">
+              <input
+                type="text"
+                placeholder="Profile picture..."
+                className="file-path validate"
+              />
+            </div>
+          </div>
           </div>
           <div className="col s1.5 right">
             <p>
